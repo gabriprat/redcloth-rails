@@ -1,0 +1,11 @@
+
+Description:
+    The textile_editor_config generator creates a config file for the textile editor.
+
+Example:
+    rails generate textile_editor_config
+
+    This will create:
+        A Javascript config file located at app/assets/javascripts/textile-editor-config.js.coffee.erb
+              
+More info on textile_editor_config can be found here: https://github.com/emjot/redcloth-rails

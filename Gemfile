@@ -1,7 +1,8 @@
-# A sample Gemfile
-source "http://rubygems.org"
-gem "RedCloth"
-gem "rdoc"
-gem "bundler"
-gemspec
+source 'http://rubygems.org'
 
+gem 'RedCloth',   '>= 4.2.0'
+gem 'rails',      '>= 3.1.0'
+gem 'rdoc'
+gem 'bundler'
+
+gemspec
