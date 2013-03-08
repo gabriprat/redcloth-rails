@@ -199,8 +199,7 @@ class TextileEditor
       newlineReplaceRegexClean = /\r\n\s\n/g
       newlineReplaceRegexDirty = "\\r\\n\\s\\n"
       newlineReplaceClean = "\r\n\n"
-    else if myField.selectionStart or myField.selectionStart is "0" # MOZ/FF/NS/S support
-
+    else if myField.selectionStart or myField.selectionStart == 0 or myField.selectionStart == '0' # MOZ/FF/NS/S support
       # figure out cursor and selection positions
       startPos = myField.selectionStart
       endPos = myField.selectionEnd
