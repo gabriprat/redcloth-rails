@@ -1,0 +1,7 @@
+h2. redcloth-rails 0.1.1
+
+* [FIX] Fixed coffeescript conversion errors in textile_editor.js.coffee, firefox/chrome/... browsers are supported again.
+
+h2. redcloth-rails 0.1.0
+
+* Initial release.
