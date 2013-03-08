@@ -22,7 +22,7 @@
 # - doesn't need to be in the body onload tag
 # - can supply your own, custom IDs for the editor to be drawn around
 #
-#todo:
+# TODO:
 # - a clean way of providing image and link inserts
 # - get the selection to properly show in IE
 #
@@ -43,7 +43,6 @@ class TextileEditorButton
     @sve      = sve       # sve = simple vs. extended. add an 's' to make it show up in the simple toolbar
     @open     = open      # set to -1 if tag does not need to be closed
     @standard = true      # this is a standard button
-    # this.framework = 'prototype'; // the JS framework used
 
 window.TextileEditorButton = TextileEditorButton
 
@@ -52,7 +51,7 @@ class TextileEditorButtonSeparator
 
   constructor: (sve) ->
     @separator = true
-    @sve = sve
+    @sve       = sve
 
 window.TextileEditorButtonSeparator = TextileEditorButtonSeparator
 
@@ -68,20 +67,19 @@ class TextileEditor
     TextileEditor.buttons || new Array()
 
   constructor: (canvas, view) ->
-
-    toolbar = document.createElement("div")
-    toolbar.id = "textile-toolbar-" + canvas
+    toolbar           = document.createElement("div")
+    toolbar.id        = "textile-toolbar-" + canvas
     toolbar.className = "textile-toolbar"
+
     @canvas = document.getElementById(canvas)
-    @canvas.parentNode.insertBefore toolbar, @canvas
+    @canvas.parentNode.insertBefore(toolbar, @canvas)
     @openTags = new Array()
 
     # Create the local Button array by assigning theButtons array to edButtons
-    edButtons = new Array()
-    edButtons = TextileEditor.getButtons()
+    edButtons       = TextileEditor.getButtons()
     standardButtons = new Array()
-    i = 0
 
+    i = 0
     while i < edButtons.length
       thisButton = @prepareButton(edButtons[i])
       if view is "s"
@@ -95,58 +93,57 @@ class TextileEditor
           toolbar.appendChild thisButton
           standardButtons.push thisButton
       i++
-    # end for
+
     te = this
     buttons = toolbar.getElementsByTagName("button")
+
     i = 0
-
     while i < buttons.length
-
-      #$A(toolbar.getElementsByTagName('button')).each(function(button) {
       unless buttons[i].onclick
         buttons[i].onclick = ->
           te.insertTag this
-          false
-      # end if
-      buttons[i].tagStart = buttons[i].getAttribute("tagStart")
-      buttons[i].tagEnd = buttons[i].getAttribute("tagEnd")
-      buttons[i].open = buttons[i].getAttribute("open")
+          return false
+
+      buttons[i].tagStart       = buttons[i].getAttribute("tagStart")
+      buttons[i].tagEnd         = buttons[i].getAttribute("tagEnd")
+      buttons[i].open           = buttons[i].getAttribute("open")
       buttons[i].textile_editor = te
-      buttons[i].canvas = te.canvas
+      buttons[i].canvas         = te.canvas
       i++
 
   # draw individual buttons (edShowButton)
   prepareButton: (button) ->
     if button.separator
-      theButton = document.createElement("span")
+      theButton           = document.createElement("span")
       theButton.className = "ed_sep"
       return theButton
+
     if button.standard
-      theButton = document.createElement("button")
+      theButton    = document.createElement("button")
       theButton.id = button.id
-      theButton.setAttribute "class", "standard"
-      theButton.setAttribute "tagStart", button.tagStart
-      theButton.setAttribute "tagEnd", button.tagEnd
-      theButton.setAttribute "open", button.open
-      img = document.createElement("img")
+      theButton.setAttribute("class", "standard")
+      theButton.setAttribute("tagStart", button.tagStart)
+      theButton.setAttribute("tagEnd", button.tagEnd)
+      theButton.setAttribute("open", button.open)
+
+      img     = document.createElement("img")
       img.src = button.display
-      theButton.appendChild img
+      theButton.appendChild(img)
     else
       return button
-    # end if !custom
+
     theButton.accessKey = button.access
-    theButton.title = button.title
-    theButton
+    theButton.title     = button.title
+    return theButton
 
   # if clicked, no selected text, tag not open highlight button
   # (edAddTag)
   addTag: (button) ->
     unless button.tagEnd is ""
       @openTags[@openTags.length] = button
-
-      #var el = document.getElementById(button.id);
-      #el.className = 'selected';
       button.className = "selected"
+
+    return button
 
   # if clicked, no selected text, tag open lowlight button
   # (edRemoveTag)
@@ -154,12 +151,14 @@ class TextileEditor
     i = 0
     while i < @openTags.length
       if @openTags[i] is button
-        @openTags.splice button, 1
+        @openTags.splice(button, 1)
 
         #var el = document.getElementById(button.id);
         #el.className = 'unselected';
         button.className = "unselected"
       i++
+
+    return undefined
 
   # see if there are open tags. for the remove tag bit...
   # (edCheckOpenTags)
@@ -169,16 +168,12 @@ class TextileEditor
     while i < @openTags.length
       tag++  if @openTags[i] is button
       i++
-    if tag > 0
-      true # tag found
-    else
-      false # tag not found
+
+    return (tag > 0) # tag found / not found
 
   # insert the tag. this is the bulk of the code.
   # (edInsertTag)
   insertTag: (button, tagStart, tagEnd) ->
-
-    #console.log(button);
     myField = button.canvas
     myField.focus()
     if tagStart
@@ -299,19 +294,20 @@ class TextileEditor
 
       # now lets look and see if the user is trying to muck with a block or block modifier
       else if button.tagStart.match(/^(h1|h2|h3|h4|h5|h6|bq|p|\>|\<\>|\<|\=|\(|\))/g)
-        insertTag = ""
-        insertModifier = ""
-        tagPartBlock = ""
-        tagPartModifier = ""
+        insertTag           = ""
+        insertModifier      = ""
+        tagPartBlock        = ""
+        tagPartModifier     = ""
         tagPartModifierOrig = "" # ugly hack but it's late
-        drawSwitch = ""
-        captureIndentStart = false
-        captureListStart = false
-        periodAddition = "\\. "
+        drawSwitch          = ""
+        captureIndentStart  = false
+        captureListStart    = false
+        periodAddition      = "\\. "
         periodAdditionClean = ". "
-        listItemsAddition = 0
-        re_list_items = new RegExp("(\\*+|\\#+)", "g") # need this regex later on when checking indentation of lists
-        re_block_modifier = new RegExp("^(h1|h2|h3|h4|h5|h6|bq|p| [\\*]{1,} | [\\#]{1,} |)(\\>|\\<\\>|\\<|\\=|[\\(]{1,}|[\\)]{1,6}|)", "g")
+        listItemsAddition   = 0
+        re_list_items       = new RegExp("(\\*+|\\#+)", "g") # need this regex later on when checking indentation of lists
+        re_block_modifier   = new RegExp("^(h1|h2|h3|h4|h5|h6|bq|p| [\\*]{1,} | [\\#]{1,} |)(\\>|\\<\\>|\\<|\\=|[\\(]{1,}|[\\)]{1,6}|)", "g")
+
         if tagPartMatches = re_block_modifier.exec(selectedText)
           tagPartBlock = tagPartMatches[1]
           tagPartModifier = tagPartMatches[2]
@@ -503,19 +499,18 @@ class TextileEditor
 
     # set the appropriate DOM value with the final text
     if FF is true
-      myField.value = finalText
+      myField.value     = finalText
       myField.scrollTop = scrollTop
     else
       sel.text = finalText
 
-    # build up the selection capture, doesn't work in IE
     if textSelected
+      # build up the selection capture, doesn't work in IE
       myField.selectionStart = startPos + newlineStartPos
       myField.selectionEnd = endPos + posDiffPos - posDiffNeg - newlineEndPos
 
-    #alert('s: ' + myField.selectionStart + ' e: ' + myField.selectionEnd + ' sp: ' + startPos + ' ep: ' + endPos + ' pdp: ' + posDiffPos + ' pdn: ' + posDiffNeg)
     else
       myField.selectionStart = cursorPos
-      myField.selectionEnd = cursorPos
+      myField.selectionEnd   = cursorPos
 
 window.TextileEditor = TextileEditor
