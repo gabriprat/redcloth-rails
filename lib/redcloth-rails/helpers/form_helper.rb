@@ -37,7 +37,11 @@ module RedCloth
           mode      = options.delete(:simple) ? 'simple' : 'extended'
           (@textile_editor_ids ||= []) << [editor_id.to_s, mode.to_s]
 
-          ActionView::Helpers::InstanceTag.new(object_name, method, self, options.delete(:object)).to_text_area_tag(options)
+          if ActionPack::VERSION::MAJOR > 3
+            ActionView::Helpers::Tags::TextArea.new(object_name, method, self, options).render
+          else
+            ActionView::Helpers::InstanceTag.new(object_name, method, self, options.delete(:object)).to_text_area_tag(options)
+          end
         end
 
         # Registers a further button on the TextileEditor toolbar.
