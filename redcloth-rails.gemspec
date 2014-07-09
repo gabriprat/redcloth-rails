@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["emjot"]
   s.email       = ["kontakt@emjot.de"]
   s.homepage    = "https://github.com/emjot/redcloth-rails"
-  s.summary     = %q{rails 3 engine which enables RedCloth and provides helpers for the awesome TextileEditor.}
+  s.summary     = %q{Rails 3/4 engine which enables RedCloth and provides helpers for the awesome TextileEditor.}
 
   s.add_dependency('RedCloth',  '>= 4.2.0')
   s.add_dependency('rails',     '>= 3.1.0')
