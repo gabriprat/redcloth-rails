@@ -1,10 +1,12 @@
+h1. redcloth-rails Changelog
+
 * [FIX] simple mode didn't work (#1)
 ** Update Note: If you call @TextileEditor.new(foo, 's')@ in your JS, you need to change 's' to 'simple'.
 
-h2. redcloth-rails 0.1.1
+h2. 0.1.1
 
 * [FIX] Fixed coffeescript conversion errors in textile_editor.js.coffee, firefox/chrome/... browsers are supported again.
 
-h2. redcloth-rails 0.1.0
+h2. 0.1.0
 
 * Initial release.
