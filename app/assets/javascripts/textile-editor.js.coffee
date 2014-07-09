@@ -82,7 +82,7 @@ class TextileEditor
     i = 0
     while i < edButtons.length
       thisButton = @prepareButton(edButtons[i])
-      if view is "s"
+      if view is "simple"
         if edButtons[i].sve is "s"
           toolbar.appendChild thisButton
           standardButtons.push thisButton
