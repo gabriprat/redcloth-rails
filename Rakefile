@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'redcloth-rails/gem_tasks'
 require 'rake/testtask'
 require 'RedCloth'
 
