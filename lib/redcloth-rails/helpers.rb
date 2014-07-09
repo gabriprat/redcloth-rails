@@ -1,6 +1,6 @@
-require File.join(File.dirname(__FILE__), 'helpers/form_builder.rb')
-require File.join(File.dirname(__FILE__), 'helpers/form_helper.rb')
-require File.join(File.dirname(__FILE__), 'helpers/form_tag_helper.rb')
+require 'redcloth-rails/helpers/form_builder'
+require 'redcloth-rails/helpers/form_helper'
+require 'redcloth-rails/helpers/form_tag_helper'
 
 module RedCloth
   module Rails
