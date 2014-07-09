@@ -2,5 +2,4 @@ h1. Release Process
 
 # edit CHANGELOG.textile and version.rb
 # commit changes
-# run @rake release@ (creates tag, builds gem and pushes it to rubygems)
-# push changes and tags to github
+# run @rake release@ (creates tag, builds gem, pushes changes/tags to github and pushes gem to rubygems)
