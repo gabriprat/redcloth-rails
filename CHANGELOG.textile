@@ -1,5 +1,7 @@
 h1. redcloth-rails Changelog
 
+h2. 0.2.0
+
 * Rails 4 compatibility (#2)
 * [FIX] simple mode didn't work (#1)
 ** Update Note: If you call @TextileEditor.new(foo, 's')@ in your JS, you need to change 's' to 'simple'.
