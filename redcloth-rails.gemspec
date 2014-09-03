@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency('RedCloth',  '>= 4.2.0')
   s.add_dependency('rails',     '>= 3.1.0')
+  s.add_dependency('sass-rails')
+  s.add_dependency('coffee-rails')
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
