@@ -4,7 +4,7 @@ bq. Homepage: 	"Github":https://github.com/emjot/redcloth-rails
 Author: 	    emjot GmbH & Co. KG
 
 p. The redcloth-rails gem enables "RedCloth":http://redcloth.org for rails (>= 3.1).
-It provides helpers to integrate the _TextileEditor_ toolbar and its assets are pipeline ready ...
+It provides helpers to integrate the _TextileEditor_ toolbar.
 
 h4. History
 
@@ -14,9 +14,10 @@ The rails 3.0 support and gemification was realized by ryanfelton (https://githu
 h4. Dependencies
 
 * RedCloth (>= 4.2)
-* Rails (>= 3.1)
-* Rails Asset Pipeline
-* JQuery
+* rails (>= 3.1)
+* sass-rails
+* coffee-rails
+* jquery
 
 h4. Installation (via Bundler)
 
@@ -29,7 +30,7 @@ Generate a config file
 
 pre. rails g textile_editor_config
 
-Include the coffees script and scss files in your asset pipeline
+Include the coffeescript and scss files in your asset manifests
 
 pre. app/assets/javascripts/application.js:
 (...)
@@ -42,13 +43,29 @@ pre. app/assets/stylesheets/application.css:
 
 h4. Usage
 
-Enable the _TextileEditor_ for your attributes via:
+Enable the _TextileEditor_ for your attributes in your form view:
 
-pre. <%= textile_editor :content %>
+<pre>
+<%= form_for(@post) do |f| %>
+  (...)
+  <%= f.textile_editor :content %>
+  (...)
+<% end %>
+
+(Or, to generate the input field without the form builder:)
+
+<%= textile_editor :post, :content %>
+</pre>
 
 Initialize the _TextileEditor_ afterwards via:
 
 pre. <%= textile_editor_initialize %>
+
+h4. Rendering Textile
+
+Please refer to "RedCloth":https://github.com/jgarber/redcloth.
+If you use haml you may want to look at the "haml-contrib":https://github.com/haml/haml-contrib gem,
+which provides a @:textile@ filter.
 
 h4. Links
 
