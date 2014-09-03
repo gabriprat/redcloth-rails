@@ -64,8 +64,7 @@ pre. <%= textile_editor_initialize %>
 h4. Rendering Textile
 
 Please refer to "RedCloth":https://github.com/jgarber/redcloth.
-If you use haml you may want to look at the "haml-contrib":https://github.com/haml/haml-contrib gem,
-which provides a @:textile@ filter.
+If you use haml you may want to look at the "haml-contrib":https://github.com/haml/haml-contrib gem, which provides a @:textile@ filter.
 
 h4. Links
 
@@ -73,3 +72,11 @@ p(. "redcloth.org":http://redcloth.org
 "textile_editor_helper (original)":http://slatecms.wvu.edu/open_source
 "textile_editor_helper (upadated for rails 3)":https://github.com/ryanfelton/textile-editor-helper
 "more info on textile":http://www.textism.com/tools/textile/
+
+h4. Contributing
+
+# Fork it
+# Create your feature branch (@git checkout -b my-new-feature@)
+# Commit your changes (@git commit -am 'Add some feature'@)
+# Push to the branch (@git push origin my-new-feature@)
+# Create new Pull Request
