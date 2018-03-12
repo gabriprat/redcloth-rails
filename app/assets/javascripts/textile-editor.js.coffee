@@ -175,7 +175,6 @@ class TextileEditor
   # (edInsertTag)
   insertTag: (button, tagStart, tagEnd) ->
     myField = button.canvas
-    myField.focus()
     if tagStart
       button.tagStart = tagStart
       button.tagEnd = (if tagEnd then tagEnd else "\n")
@@ -185,6 +184,8 @@ class TextileEditor
 
     # grab the text that's going to be manipulated, by browser
     if document.selection # IE support
+      myField.focus()
+      
       sel = document.selection.createRange()
 
       # set-up the text vars
